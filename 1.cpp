@@ -5,7 +5,7 @@
 using namespace std;
 int main()
 {
-    //Comentario prueba
+    //Comentario pruebaaaaaaaaaaaaaaa
     pthread_t thread1;
     int pos1,pos2;
     int dificultad = 0;
