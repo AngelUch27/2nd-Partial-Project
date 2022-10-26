@@ -5,10 +5,10 @@
 using namespace std;
 int main()
 {
-    //Comentario pruebaaaaaaaaaaaaaaa
     pthread_t thread1;
     int pos1,pos2;
     int dificultad = 0;
+    
     string fichero;
     
     
@@ -16,21 +16,19 @@ int main()
     match partida(5,5,5);
     match partida2(10,10,10);
     match partida3(50,50,50); 
+   
     cout<<"Welcome to Battleship"<<endl;
     cout<<"Please select difficult\n1. Easy.\n2. Medium.\n3.Hard."<<endl;
     cin>>dificultad;
     switch(dificultad)
     {
         case 1:
-            
             asignalos(partida);
             break;
         case 2:
-            
             asignalos(partida2);
             break;
         case 3:
-             
             asignalos(partida3);          
             break;
         default:
@@ -59,11 +57,8 @@ int main()
         show();
         cout<<"Number of enemy ships left: "<<NumberOfShipsRival()<<endl<<"Number of allies: "<<NumberOfShips()<<endl<<endl;
 
-        
-
         cout<<"Enemy turn..."<<endl;
-        pthread_create( &thread1, NULL, &functionC, NULL);//Hilos
-        pthread_join(thread1,NULL);
+        AttackRival();
         show();
         cout<<"Number of enemy ships left: "<<NumberOfShipsRival()<<endl<<"Number of allies: "<<NumberOfShips()<<endl<<"Do you want to continue?(y/n)"<<endl<<endl;
         cin>> prompt;
@@ -71,11 +66,29 @@ int main()
         {
             break;
         }
-
-        
     }
-    showGame();
-    cout<<"Game over!" <<endl;
-    winner(NumberOfShips(),NumberOfShipsRival());
-   
+        showGame();
+        cout<<"Game over!" <<endl;
+        winner(NumberOfShips(),NumberOfShipsRival());
+        cout<<endl<<"Choose an option: "<<endl<<"1. Show moves and quit"<<endl<<"2. Quit game"<<endl;
+        int opcion;
+        cin>>opcion;
+        switch(opcion)
+        {
+            case 1:
+                cout<<"Tus jugadas: "<<endl;
+                mostrarMapitas();
+                mostrarHits();
+                cout<<"Enemy moves: "<<endl;
+                mostrarMapitasRival();
+                mostrarHitsRival();
+                cout<<"Thanks for play";
+                exit(0);
+                break;
+            case 2:
+                cout<<"Thanks for play";
+                exit(0);
+                break;
+        }
+
 }

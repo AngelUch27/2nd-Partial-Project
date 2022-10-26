@@ -2,9 +2,11 @@
 #include <iostream>
 #include <ctime>
 #include <pthread.h>
+#include<map>
+#include<vector>
 using namespace std;
 pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
-
+int turno = 1;
 class match
 {
     protected:
@@ -264,38 +266,109 @@ void SetShips(string name)
     archivoLeer.close();
 }
 
-bool AttackRival()
+
+//Vectores
+vector<int> Hits;
+vector<int> HitsRival;
+void hits(int x)
+{
+    Hits.push_back(x);//Turnos en los que hubo hits
+}
+void hitsRival(int x)
+{
+    HitsRival.push_back(x);
+}
+void mostrarHits()
+{
+    vector<int>::iterator it = Hits.begin();
+    for(auto it = Hits.begin();it != Hits.end(); it++)
+    {
+        cout<<"Golpeaste al enemigo en el turno: "<<*it<<endl;
+    }
+}
+void mostrarHitsRival()
+{
+    vector<int>::iterator it = HitsRival.begin();
+    for(auto it = HitsRival.begin();it != HitsRival.end(); it++)
+    {
+        cout<<"Fuiste golpeado por el enemigo en el turno: "<<*it<<endl;
+    }
+}
+
+
+//maps
+map<int,int> jugadas;
+map<int,int> jugadasRival;
+void mapitas(int x,int y)
+{
+    jugadas.insert(make_pair(x,y));
+}
+void mapitasRival(int x,int y)
+{
+    jugadasRival.insert(make_pair(x,y));
+}
+void mostrarMapitas()
+{
+    for(map<int,int>::iterator it = jugadas.begin(); it != jugadas.end(); it++)
+    {
+        pair<int,int> bbbb = *it;
+        int i=1;
+        cout<<"Jugada "<<i<<" ( "<<bbbb.first << " , "<<bbbb.second <<" )"<<endl;
+        i++;
+    }
+}
+void mostrarMapitasRival()
+{
+    for(map<int,int>::iterator it = jugadasRival.begin(); it != jugadasRival.end(); it++)
+    {
+        pair<int,int> bbbb = *it;
+        int i=1;
+        cout<<"Jugada "<<i<<" ( "<<bbbb.first << " , "<<bbbb.second <<" )"<<endl;
+        i++;
+    }
+}
+
+
+bool AttackRival()//No lo borres
 {
     int x = rand() % rows;
     int y = rand() % elements;
+    mapitasRival(x,y);
     if(matrix[x][y] == 's')
     {
         matrix[x][y] = 'H';
+        cout<<endl<<"He got you :("<<endl;
+        hitsRival(turno);
         return true;
     }
     else if(matrix[x][y] != 's')
     {
         matrix[x][y] = 'x';
+        cout<<endl<<"No allied ship sunk :)"<<endl;
+        return false;
     }
-    return false;
 }
 
-
+//Tu turno
 bool Attack(int x,int y)
 {
+    mapitas(x,y);
     if(matrixfinal[x][y] == 's')
     {
         matrixfinal[x][y] = matrixrival[x][y] =  'H';
+        hits(turno);
+        turno++;
         return true;
     }
     else if(matrixfinal[x][y] != 's')
     {
         matrixrival[x][y] = matrixfinal[x][y] =  'x';
+        turno++;
     }
     return false;
 }
 
-
+//Te dice quien fue el ganador.
 void winner(int you, int pc)
 {
     if(you > pc)
@@ -312,23 +385,18 @@ void winner(int you, int pc)
     }
 }
 
+//Turno del rival (Hilo)
 void *functionC( void *ptr)
 {
    pthread_mutex_lock( &mutex1 );
-    int x = rand() % rows;
-    int y = rand() % elements;
-    if(matrix[x][y] == 's')
-    {
-        matrix[x][y] = 'H';
-        cout<<endl<<"He got you :("<<endl;
-    }
-    else if(matrix[x][y] != 's')
-    {
-        matrix[x][y] = 'x';
-        cout<<endl<<"No allied ship sunk :)"<<endl;
-    }
+    
     
    pthread_mutex_unlock( &mutex1 );
 }
+
+
+
+
+
 
 
