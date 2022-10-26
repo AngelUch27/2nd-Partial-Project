@@ -15,9 +15,10 @@ int main()
     char prompt;
     match partida(5,5,5);
     match partida2(10,10,10);
-    match partida3(50,50,50); 
+    match partida3(15,15,15); 
+
    
-    cout<<"Welcome to Battleship"<<endl;
+    Titulos("Welcome.txt");
     cout<<"Please select difficult\n1. Easy.\n2. Medium.\n3.Hard."<<endl;
     cin>>dificultad;
     switch(dificultad)

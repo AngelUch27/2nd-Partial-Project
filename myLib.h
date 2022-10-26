@@ -44,9 +44,9 @@ int match::getMaxShips()
 int rows; //Has una clase con estos
 int elements;
 int maxShips; //Cantidad maxima de naves
-char matrixrival[50][50];
-char matrixfinal[50][50];
-char matrix[50][50];
+char matrixrival[15][15];
+char matrixfinal[15][15];
+char matrix[15][15];
 void asignalos(match partida)
 {
     rows = partida.getRows();
@@ -265,7 +265,24 @@ void SetShips(string name)
     }
     archivoLeer.close();
 }
-
+//Titulos Leer archivos
+void Titulos(string name)
+{
+    ifstream archivoLeer;
+    string text;
+    archivoLeer.open(name, ios::in);  //abrir archivo en modo lectura
+    if(archivoLeer.fail())
+    {
+        cout<<"The file can not be open or doesn't exist, try again"<<endl<<"Closing program...";
+        exit(0); //exit(1);
+    } 
+    while(!archivoLeer.eof()) 
+    {
+        getline(archivoLeer,text);
+        cout<<text<<endl;
+    }
+    archivoLeer.close();
+}
 
 //Vectores
 vector<int> Hits;
@@ -393,6 +410,9 @@ void *functionC( void *ptr)
     
    pthread_mutex_unlock( &mutex1 );
 }
+
+
+
 
 
 
