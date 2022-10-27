@@ -1,8 +1,4 @@
 #include "myLib.h"
-#include <iostream>
-#include <ctime>
-#include <pthread.h>
-
 using namespace std;
 int main()
 {
@@ -91,7 +87,7 @@ int main()
                 mostrarMapitasRival();
                 mostrarHitsRival();
                 ciclo = false;
-                pthread_join(thread2,(void**)&th);
+                //pthread_join(thread2,(void**)&th);
                 
                 cout<<"Thanks for play";
                 exit(0);
@@ -99,7 +95,7 @@ int main()
             case 2:
                 
                 ciclo = false;
-                pthread_join(thread2,(void**)&th);
+                //pthread_join(thread2,(void**)&th);
                 cout<<"Thanks for play";
                 exit(0);
                 break;
