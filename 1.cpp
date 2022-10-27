@@ -1,11 +1,12 @@
 #include "myLib.h"
 #include <iostream>
 #include <ctime>
+#include <pthread.h>
 
 using namespace std;
 int main()
 {
-    pthread_t thread1;
+    pthread_t thread2;
     int pos1,pos2;
     int dificultad = 0;
     
@@ -42,6 +43,7 @@ int main()
     cout<<"Enter the name of the file with the coordinates: ";
     cin>>fichero;
     SetShips(fichero);
+    pthread_create(&thread2,NULL,&tempo,NULL);
     while(1)
     {
         cout<<"Your turn..."<<endl;
@@ -68,25 +70,36 @@ int main()
             break;
         }
     }
+        
         showGame();
-        cout<<"Game over!" <<endl;
+        Titulos("Gameover.txt");       
         winner(NumberOfShips(),NumberOfShipsRival());
+
         cout<<endl<<"Choose an option: "<<endl<<"1. Show moves and quit"<<endl<<"2. Quit game"<<endl;
         int opcion;
         cin>>opcion;
+        int th;
         switch(opcion)
-        {
+        {   
             case 1:
+                
+                
                 cout<<"Tus jugadas: "<<endl;
                 mostrarMapitas();
                 mostrarHits();
                 cout<<"Enemy moves: "<<endl;
                 mostrarMapitasRival();
                 mostrarHitsRival();
+                ciclo = false;
+                pthread_join(thread2,(void**)&th);
+                
                 cout<<"Thanks for play";
                 exit(0);
                 break;
             case 2:
+                
+                ciclo = false;
+                pthread_join(thread2,(void**)&th);
                 cout<<"Thanks for play";
                 exit(0);
                 break;

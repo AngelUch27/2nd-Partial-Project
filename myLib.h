@@ -4,8 +4,9 @@
 #include <pthread.h>
 #include<map>
 #include<vector>
+#include<windows.h>
 using namespace std;
-pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
+
 int turno = 1;
 class match
 {
@@ -401,15 +402,34 @@ void winner(int you, int pc)
         cout<<"The game was tied"<<endl;
     }
 }
-
-//Turno del rival (Hilo)
-void *functionC( void *ptr)
+bool ciclo = true;//Condicion para que acabe el temporizador
+//Temporizador (Hilo)
+void *tempo(void *arg)
 {
-   pthread_mutex_lock( &mutex1 );
+    int segundo = 0;
+    int minutos = 0;
+    int horas = 0;
     
-    
-   pthread_mutex_unlock( &mutex1 );
+    while(ciclo)
+    {
+        Sleep(1000);
+        segundo++;
+        if(segundo == 60)
+        {
+            minutos++;
+            segundo =0;
+        }
+        if(minutos == 60)
+        {
+            horas++;
+            minutos=0;
+        }
+    }
+    cout<<"Tiempo de juego:"<<endl<<horas<<" horas."<<endl<<minutos<<" minutos."<<endl<<segundo<<" segundos."<<endl;
+    //cout<<"Tiempo de juego: "<<horas<<":"<<minutos<<":"<<segundo;
+    pthread_exit(NULL);
 }
+
 
 
 
