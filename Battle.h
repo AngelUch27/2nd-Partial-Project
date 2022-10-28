@@ -1,5 +1,3 @@
-using namespace std;
-int turno = 1;
 class match
 {
     protected:

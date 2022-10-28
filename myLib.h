@@ -7,11 +7,12 @@
 #include<windows.h>
 #include"Battle.h"
 using namespace std;
-int rows; //Has una clase con estos
+int rows; 
 int elements;
 int maxShips; //Cantidad maxima de naves
 int victoria=0;
 int victoriaRival = 0;
+int turno = 1;
 char matrixrival[15][15];
 char matrixfinal[15][15];
 char matrix[15][15];
@@ -180,41 +181,45 @@ void SetShipsRival()
 void SetShips(string name)
 {
     
-    ifstream archivoLeer;
-    string text;
-    int x = 0;
-    int y = 0;
-    int s = 0;
-        
+        ifstream archivoLeer;
+        string text;
+        int x = 0;
+        int y = 0;
+        int s = 0;
+            
 
-    archivoLeer.open(name, ios::in);  //abrir archivo en modo lectura
-    if(archivoLeer.fail())
-    {
-        cout<<"The file can not be open or doesn't exist, try again"<<endl<<"Closing program...";
-        exit(0); //exit(1);
-    } 
-    while(!archivoLeer.eof() && s<maxShips) 
-    { 
-        archivoLeer>>x;
-        archivoLeer>>y;
-        if(matrix[x][y] != 's')
+        archivoLeer.open(name, ios::in);  //abrir archivo en modo lectura
+        if(archivoLeer.fail())
         {
-            s++;
-            matrix[x][y] = 's';
-        }
-        else if(matrix[x][y] == 's')
-        {
-            cout<<"There is already a ship in the coordenates ("<<x<<","<<y<<")\n Do you want to continue anyway? (y,n)"<<endl;
-            char aux2 = 0;
-            cin>>aux2;
-            if(aux2 == 'n' || aux2 == 'N')
+            cout<<"The file can not be open or doesn't exist, try again"<<endl<<"Closing program...";
+            exit(0); //exit(1);
+        } 
+        while(!archivoLeer.eof() && s<maxShips) 
+        { 
+           
+
+            archivoLeer>>x;
+            archivoLeer>>y;
+            if(matrix[x][y] != 's')
             {
-                cout<<"Closing game...";
-                exit(0);
+                s++;
+                matrix[x][y] = 's';
             }
-        }
+            else if(matrix[x][y] == 's')
+            {
+                cout<<"There is already a ship in the coordenates ("<<x<<","<<y<<")\n Do you want to continue anyway? (y,n)"<<endl;
+                char aux2 = 0;
+                cin>>aux2;
+                if(aux2 == 'n' || aux2 == 'N')
+                {
+                    cout<<"Closing game...";
+                    exit(0);
+                }
+            }
+            }
+             
         
-    }
+    
     if(s < maxShips)
     {
         cout<<"You can use "<<maxShips<<" ships but you only have "<<s<<" ships, do you want to continue? (y,n)";
@@ -228,8 +233,9 @@ void SetShips(string name)
         
     }
     archivoLeer.close();
+    
+   
 }
-
 
 //Titulos Leer archivos
 void Titulos(string name)
@@ -337,6 +343,7 @@ bool AttackRival()//No lo borres
 bool Attack(int x,int y)
 {
     mapitas(x,y);
+
     if(matrixfinal[x][y] == 's')
     {
         matrixfinal[x][y] = matrixrival[x][y] =  'H';
