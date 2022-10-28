@@ -205,7 +205,7 @@ void SetShips(string name)
                 s++;
                 matrix[x][y] = 's';
             }
-            else if(matrix[x][y] == 's')
+            /*else if(matrix[x][y] == 's')
             {
                 cout<<"There is already a ship in the coordenates ("<<x<<","<<y<<")\n Do you want to continue anyway? (y,n)"<<endl;
                 char aux2 = 0;
@@ -215,8 +215,8 @@ void SetShips(string name)
                     cout<<"Closing game...";
                     exit(0);
                 }
-            }
-            }
+            }*/
+        }
              
         
     
@@ -272,7 +272,7 @@ void mostrarHits()
     vector<int>::iterator it = Hits.begin();
     for(auto it = Hits.begin();it != Hits.end(); it++)
     {
-        cout<<"Golpeaste al enemigo en el turno: "<<*it<<endl;
+        cout<<"You hitted the enemy on turn: "<<*it<<endl;
     }
 }
 void mostrarHitsRival()
@@ -280,7 +280,7 @@ void mostrarHitsRival()
     vector<int>::iterator it = HitsRival.begin();
     for(auto it = HitsRival.begin();it != HitsRival.end(); it++)
     {
-        cout<<"Fuiste golpeado por el enemigo en el turno: "<<*it<<endl;
+        cout<<"You were hitted by the enemy on turn:"<<*it<<endl;
     }
 }
 
@@ -302,7 +302,7 @@ void mostrarMapitas()
     {
         pair<int,int> bbbb = *it;
         int i=1;
-        cout<<"Jugada "<<i<<" ( "<<bbbb.first << " , "<<bbbb.second <<" )"<<endl;
+        cout<<" ( "<<bbbb.first << " , "<<bbbb.second <<" )"<<endl;
         i++;
     }
 }
@@ -312,7 +312,7 @@ void mostrarMapitasRival()
     {
         pair<int,int> bbbb = *it;
         int i=1;
-        cout<<"Jugada "<<i<<" ( "<<bbbb.first << " , "<<bbbb.second <<" )"<<endl;
+        cout<<" ( "<<bbbb.first << " , "<<bbbb.second <<" )"<<endl;
         i++;
     }
 }
@@ -399,7 +399,7 @@ void *tempo(void *arg)
             minutos=0;
         }
     }
-    cout<<"Tiempo de juego:"<<endl<<horas<<" horas."<<endl<<minutos<<" minutos."<<endl<<segundo<<" segundos."<<endl;
+    cout<<"Time:"<<endl<<horas<<" hours."<<endl<<minutos<<" minutes."<<endl<<segundo<<" seconds."<<endl;
     //cout<<"Tiempo de juego: "<<horas<<":"<<minutos<<":"<<segundo;
     pthread_exit(NULL);
 }

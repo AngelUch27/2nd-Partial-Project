@@ -11,6 +11,7 @@ int main()
     match partida2(10,10,10);
     match partida3(15,15,15); 
     Titulos("Welcome.txt");
+    
     cout<<"Please select difficult\n1. Easy.\n2. Medium.\n3. Hard."<<endl;
     cin>>dificultad;
     switch(dificultad)
@@ -25,7 +26,11 @@ int main()
             asignalos(partida3);          
             break;
         default:
-            cout<<"Please select a number from 1 to 3";
+        while(dificultad != 1 && dificultad != 2 && dificultad != 3)
+        {
+            cout<<"Please select a number from 1 to 3"<<endl;
+            cin>>dificultad;
+        }
             break;
     }
     srand(time(NULL));
