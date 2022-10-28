@@ -10,6 +10,8 @@ using namespace std;
 int rows; //Has una clase con estos
 int elements;
 int maxShips; //Cantidad maxima de naves
+int victoria=0;
+int victoriaRival = 0;
 char matrixrival[15][15];
 char matrixfinal[15][15];
 char matrix[15][15];
@@ -320,6 +322,7 @@ bool AttackRival()//No lo borres
         matrix[x][y] = 'H';
         cout<<endl<<"He got you :("<<endl;
         hitsRival(turno);
+        victoriaRival++;
         return true;
     }
     else if(matrix[x][y] != 's')
@@ -339,6 +342,7 @@ bool Attack(int x,int y)
         matrixfinal[x][y] = matrixrival[x][y] =  'H';
         hits(turno);
         turno++;
+        victoria++;
         return true;
     }
     else if(matrixfinal[x][y] != 's')

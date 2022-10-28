@@ -65,6 +65,10 @@ int main()
         {
             break;
         }
+        else if(victoria >= maxShips || victoriaRival >= maxShips)
+        {
+            break;
+        }
     }
         
         showGame();
@@ -87,7 +91,7 @@ int main()
                 mostrarMapitasRival();
                 mostrarHitsRival();
                 ciclo = false;
-                //pthread_join(thread2,(void**)&th);
+                pthread_join(thread2,(void**)&th);
                 
                 cout<<"Thanks for play";
                 exit(0);
@@ -95,7 +99,7 @@ int main()
             case 2:
                 
                 ciclo = false;
-                //pthread_join(thread2,(void**)&th);
+                pthread_join(thread2,(void**)&th);
                 cout<<"Thanks for play";
                 exit(0);
                 break;
