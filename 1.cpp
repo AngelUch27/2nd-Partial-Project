@@ -44,7 +44,7 @@ int main()
         cin >> pos1 >> pos2;
         while(pos1>rows-1 || pos2>rows-1)
         {
-            cout<<"Enter a coordenate between 0 - "<<rows-1;
+            cout<<"Please enter a coordenate between 0 - "<<rows-1<<endl;
             cin >> pos1 >> pos2;
         }
         if(Attack(pos1,pos2))
