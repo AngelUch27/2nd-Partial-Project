@@ -6,3 +6,4 @@ After that the user will write the coordenates of the attack that he wants to ma
 After each turn the program will ask the player if he wants to continue.
 When the player choose not to continue or one of the players loose all his ships the game will end.
 You can select if you want to see the movements and quit or only quit the program.(When he does that the program will show how may time the user spend playing.
+https://www.youtube.com/watch?v=v1ozHG9LOwk
